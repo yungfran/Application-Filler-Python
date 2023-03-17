@@ -13,12 +13,17 @@ import sys
 
 name = "Robert Barratheon"
 email = "scriptapplicationtester@gmail.com"
-Phone = "8327049932"
+phone = "8327049932"
 linkedin = "https://www.linkedin.com/in/lord-rob/"
 github = "https://github.com/LordRob"
 portfolio = "robbartheon.com"
+current_company = "Amazon"
+twitter = ""
+other_website = ""
+additional_data = "I WORK HARD. I PLAY HARD"
 veteran = False
 
+#https://boards.greenhouse.io/evolutioniq/jobs/4716493004?source=LinkedIn#app
 
 
 class Browser:
@@ -33,28 +38,95 @@ class Browser:
     def goto(self,url):
         self.driver.get(url)
     
+    def apply(self):
+        self.input_required_data()
+        self.input_optional_data()
+    
+    def input_required_data(self):
+        self.upload_resume()
+        self.input_name()
+        self.input_email()
+        self.input_phone()
+        self.input_company()
+    
+    def input_optional_data(self):
+        self.input_linkedin()
+        self.input_twitter()
+        self.input_github()
+        self.input_other_website()
+        self.input_portfolio()
+        self.input_additional_data()
+
+    """ Required Inputs """
+    def upload_resume(self):
+        resume_elem = self.driver.find_element(By.ID, "resume-upload-input")
+        resume_elem.send_keys("/Users/francis/Desktop/ApplicationScript/RB_Resume.pdf")
+        
     def input_name(self):
-        #email_locator = sel.driver.locate_with(By.TAG_NAME, "input").above({By.ID: "password"})
-        # email_locator = self.driver.locate_with(By.TAG_NAME, "input")
-        # conclusion_div = browser.find_element(locate_with(By.TAG_NAME,  "input").below(decision_div))
         name_elem = self.driver.find_element(By.NAME, "name")
         name_elem.send_keys(name)
-        #return self.driver.find_elements(By.CLASS, "application-question")
     
     def input_email(self):
         email_elem = self.driver.find_element(By.NAME, "email")
         email_elem.send_keys(email)
     
     def input_phone(self):
+        phone_elem = self.driver.find_element(By.NAME, "phone")
+        phone_elem.send_keys(phone)
+
+    def input_company(self):
+        company_elem = self.driver.find_element(By.NAME, "org")
+        company_elem.send_keys(current_company)
         
 
-        
+    """ Optional Inputs"""
+    def input_linkedin(self):
+        try:
+            linkedin_elem = self.driver.find_element(By.NAME, "urls[LinkedIn]")
+            linkedin_elem.send_keys(linkedin)
+        except:
+            print("No LinkedIn Found")
+
+    def input_twitter(self):
+        try:
+            twitter_elem = self.driver.find_element(By.NAME, "urls[Twitter]")
+            twitter_elem.send_keys(twitter)
+        except:
+            print("No Twitter Found")    
+
+    def input_github(self):
+        try:
+            github_elem = self.driver.find_element(By.NAME, "urls[GitHub]")
+            github_elem.send_keys(github)
+        except:
+            print("No GitHub Found")
+
+    def input_portfolio(self):
+        try:
+            portfolio_elem = self.driver.find_element(By.NAME, "urls[Portfolio]")
+            portfolio_elem.send_keys(portfolio)
+        except:
+            print("No portfolio Found")
+    
+    def input_other_website(self):
+        try:
+            other_website_elem = self.driver.find_element(By.NAME, "urls[Other]")
+            other_website_elem.send_keys(other_website)
+        except:
+            print("No other website Found")    
+    
+    def input_additional_data(self):
+        try:
+            additional_data_elem = self.driver.find_element(By.NAME, "comments")
+            additional_data_elem.send_keys(additional_data)
+        except:
+            print("No other website Found")    
+            
 
 
 if __name__ == "__main__":
     browser = Browser()
-    browser.goto("https://jobs.lever.co/scratch/11d8ae1f-5429-4f79-948d-c0fea02ee28c/apply")
+    browser.goto("https://jobs.lever.co/broadwaytechnology/5f8b6736-f326-44fa-b005-e2835b6956e2/apply")
     time.sleep(2)
-    browser.inputName()
-    browser.inputEmail()
+    browser.apply()
     time.sleep(10)
