@@ -8,21 +8,18 @@ from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import time
+import json
 
 import sys
 
-name = "Robert Barratheon"
-email = "scriptapplicationtester@gmail.com"
-phone = "8327049932"
-linkedin = "https://www.linkedin.com/in/lord-rob/"
-github = "https://github.com/LordRob"
-portfolio = "robbartheon.com"
-current_company = "Amazon"
-twitter = ""
-other_website = ""
-additional_data = "I WORK HARD. I PLAY HARD"
-veteran = False
+with open('user_info.json') as f:
+    # Load the contents of the file
+    user_info = json.load(f)
 
+    
+
+# Do something with the data
+print(data["name"])
 #https://boards.greenhouse.io/evolutioniq/jobs/4716493004?source=LinkedIn#app
 
 
@@ -64,61 +61,61 @@ class Browser:
         
     def input_name(self):
         name_elem = self.driver.find_element(By.NAME, "name")
-        name_elem.send_keys(name)
+        name_elem.send_keys(user_info["name"])
     
     def input_email(self):
         email_elem = self.driver.find_element(By.NAME, "email")
-        email_elem.send_keys(email)
+        email_elem.send_keys(user_info["email"])
     
     def input_phone(self):
         phone_elem = self.driver.find_element(By.NAME, "phone")
-        phone_elem.send_keys(phone)
+        phone_elem.send_keys(user_info["phone"])
 
     def input_company(self):
         company_elem = self.driver.find_element(By.NAME, "org")
-        company_elem.send_keys(current_company)
+        company_elem.send_keys(user_info["current_company"])
         
 
     """ Optional Inputs"""
     def input_linkedin(self):
         try:
             linkedin_elem = self.driver.find_element(By.NAME, "urls[LinkedIn]")
-            linkedin_elem.send_keys(linkedin)
+            linkedin_elem.send_keys(user_info["linkedin"])
         except:
             print("No LinkedIn Found")
 
     def input_twitter(self):
         try:
             twitter_elem = self.driver.find_element(By.NAME, "urls[Twitter]")
-            twitter_elem.send_keys(twitter)
+            twitter_elem.send_keys(user_info["twitter"])
         except:
             print("No Twitter Found")    
 
     def input_github(self):
         try:
             github_elem = self.driver.find_element(By.NAME, "urls[GitHub]")
-            github_elem.send_keys(github)
+            github_elem.send_keys(user_info["github"])
         except:
             print("No GitHub Found")
 
     def input_portfolio(self):
         try:
             portfolio_elem = self.driver.find_element(By.NAME, "urls[Portfolio]")
-            portfolio_elem.send_keys(portfolio)
+            portfolio_elem.send_keys(user_info["portfolio"])
         except:
             print("No portfolio Found")
     
     def input_other_website(self):
         try:
             other_website_elem = self.driver.find_element(By.NAME, "urls[Other]")
-            other_website_elem.send_keys(other_website)
+            other_website_elem.send_keys(user_info["other_website"])
         except:
             print("No other website Found")    
     
     def input_additional_data(self):
         try:
             additional_data_elem = self.driver.find_element(By.NAME, "comments")
-            additional_data_elem.send_keys(additional_data)
+            additional_data_elem.send_keys(user_info["additional_data"])
         except:
             print("No other website Found")    
             
@@ -130,3 +127,45 @@ if __name__ == "__main__":
     time.sleep(2)
     browser.apply()
     time.sleep(10)
+
+"""
+/* Pronouns
+
+He/him
+
+She/her
+
+They/them
+
+Xe/xem
+
+Ze/hir
+
+Ey/em
+
+Hir/hir
+
+Fae/faer
+
+Hu/hu */
+
+/*  Race
+
+Hispanic or Latino
+<div>White (Not Hispanic or Latino)</div>
+<div>Black or African American (Not Hispanic or Latino)</div>
+<div>Two or More Races (Not Hispanic or Latino)</div>
+<div>Asian (Not Hispanic or Latino)</div>
+<div>Two or More Races (Not Hispanic or Latino)</div>
+
+
+*/
+
+/*Veteran
+Yes
+No
+Decline to identify
+
+*/
+
+"""
